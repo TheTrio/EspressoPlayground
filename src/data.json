@@ -1,0 +1,180 @@
+{
+  "Variables": [
+    {
+      "explanation": "Variables are declared with the let keyword.",
+      "code": "let a = 10;\nlet b = 20;\nprint(a + b); // 30"
+    },
+    {
+      "explanation": "There are currently 8 types of values: number, boolean, string, array, `null`, `undefined`, dictionaries , and function.\n\n**Note**: Arrays, Dictionaries and Functions are stored as references, while the rest are primitive values.",
+      "code": "print(10==10) // true\nprint([1]==[1]) // false\n"
+    },
+    {
+      "explanation": "You can mutate already declared variables.",
+      "code": "let a = 10;\na = 20;"
+    },
+    {
+      "explanation": "Using let on an already declared variable works, but do keep in mind if the variable was in the global scope, it will be shadowed.",
+      "code": "let a = 10;\n{\n  let a = 20;\n  print(a); // 20\n}\nprint(a); // 10"
+    },
+    {
+      "explanation": "This is in contrast to simply using the `=` operator, which will mutate the variable in the scope it was declared in.",
+      "code": "let a = 10;\n{\n  a = 20;\n  print(a); // 20\n}\nprint(a); // 20"
+    }
+  ],
+  "Arrays": [
+    {
+      "explanation": "Arrays are declared with square brackets `[]`.",
+      "code": "let a = [1, 2, 3];\npush(a, 4);\nprint(a); // [1, 2, 3, 4]"
+    },
+    {
+      "explanation": "You can access and mutate elements in an array using square brackets.",
+      "code": "let a = [1, 2, 3];\na[0]; // 1\na[0] = 10;\nprint(a); // [10, 2, 3]"
+    },
+    {
+      "explanation": "There is no restriction on the type of elements in an array.",
+      "code": "let a = [1, \"hello\", true, [1, 2, 3], fn(x){ return x*x; }];\nprint(a[4](10)); // 100\nprint(a[1] + \" world\"); // hello world\n"
+    },
+    {
+      "explanation": "Similar to other languages, arrays are references. This means that if you assign an array to another variable, both variables will point to the same array.",
+      "code": "let a = [1, 2, 3];\nlet b = a;\nb[0] = 10;\nprint(a); // [10, 2, 3]\n"
+    }
+  ],
+  "Strings": [
+    {
+      "explanation": "Strings are declared with double quotes `\"\"`.",
+      "code": "let a = \"hello\";\nlet b = \"world\";\nprint(a + \" \" + b); // hello world"
+    },
+    {
+      "explanation": "You can access characters in a string using square brackets.",
+      "code": "let a = \"hello\";\nprint(\"I like to \" + a[1] + \"at\");// I like to eat\n"
+    },
+    {
+      "explanation": "However, strings are immutable. This means that you can't change a character in a string.",
+      "code": "let a = \"hello\";\na[0] = \"H\"; // This will throw an error"
+    }
+  ],
+  "Dictionaries": [
+    {
+      "explanation": "Similar to other programming languages, Espresso supports key value pairs via dictionaries.",
+      "code": "let a = {\"name\": \"Shashwat\", \"age\": 22};\na[\"name\"]; // Shashwat\na[\"age\"] = 18;\nprint(a[\"age\"]); // 18\n"
+    },
+    {
+      "explanation": "Similar to arrays, the values in a dictionary can be of any type.",
+      "code": "let a = {\"name\": \"Shashwat\", \"age\": 22, \"func\": fn(x){ return x*x; }};\nprint(a[\"func\"](10)); // 100\n"
+    },
+    {
+      "explanation": "The keys in a dictionary can be of any type. This includes objects, arrays and functions and even other dictionaries. However, for non-value types like these, the key is a pointer to the object, not the object itself.\n\nThis means that if you use an object as a key, you need to use the same object to access the value. Having two objects with the same properties will not work.\n\nThis is done to ensure the constant time complexity of dictionary operations while allowing for flexibility in the keys.\n",
+      "code": "let dummy = {\"name\": \"Shashwat\"};\nlet a = {dummy: \"hello\"};\nprint(a[dummy]); // hello\nprint(a[{\"name\": \"Shashwat\"}]) // null\n"
+    },
+    {
+      "explanation": "To create an empty dictionary, you can use the `dict` function. `{}` will be treated as an empty block(which evaluates to `undefined`).",
+      "code": "let a = dict();\nlet b = {};\nprint(b) // undefined\n"
+    }
+  ],
+  "Functions": [
+    {
+      "explanation": "Functions can be declared with the `fn` keyword. Like everything else in Espresso, functions are expressions.\n\nThis means they can be assigned to variables.\n\n",
+      "code": "let add = fn(a, b) {\n  return a + b;\n};\n\nprint(add(10, 20)); // 30"
+    },
+    {
+      "explanation": "Passed to other functions.",
+      "code": "let apply = fn(f, a, b) {\n  return f(a, b);\n};\n\nlet add = fn(a, b) {\n  return a + b;\n};\n\nprint(apply(add, 10, 20)); // 30\n"
+    },
+    {
+      "explanation": "And even returned from other functions.",
+      "code": "let makeAdder = fn(a) {\n  return fn(b) {\n    return a + b;\n  };\n};\n\nlet add10 = makeAdder(10);\nprint(add10(20)); // 30"
+    },
+    {
+      "explanation": "They also close over their environment.",
+      "code": "let makeCounter = fn() {\n  let count = 0;\n  return fn() {\n    count = count + 1;\n    return count;\n  };\n};\n\nlet counter = makeCounter();\nprint(counter()); // 1\nprint(counter()); // 2"
+    },
+    {
+      "explanation": "Since functions are expressions, you can also have anonymous lambda functions.",
+      "code": "let apply = fn(f, a, b) {\n  return f(a, b);\n};\n\nprint(apply(fn(a, b) { a + b; }, 10, 20)); // 30"
+    }
+  ],
+  "Blocks": [
+    {
+      "explanation": "Blocks are a sequence of statements enclosed in curly braces `{}`. They are used to group statements together.\n\nAnd yes, blocks are expressions too.\n",
+      "code": "let a = {\n  let b = 10;\n  let c = 20;\n  b + c\n};\nprint(a); // 30"
+    },
+    {
+      "explanation": "Variables declared inside a block are only available inside that block.",
+      "code": "let a = {\n  let b = 10;\n  b\n};\nb // throws an error"
+    }
+  ],
+  "Conditionals": [
+    {
+      "explanation": "You can use the `if` keyword to create conditionals.",
+      "code": "let name = \"Shashwat\";\nlet out = if (name == \"Shashwat\") {\n  \"Hello Shashwat!\"\n} else {\n  \"Hello stranger!\"\n};\n\nprint(out);"
+    },
+    {
+      "explanation": "`if` blocks are expressions too. They can have an optional `else` block",
+      "code": "let age = 22;\nlet type = if (age > 18) {\n  \"adult\"\n} else {\n  \"minor\"\n};\nprint(type) // adult"
+    }
+  ],
+  "Loops": [
+    {
+      "explanation": "Espresso supports the traditional `while` loop.",
+      "code": "let i = 0;\nwhile (i < 10) {\n  print(i);\n  i = i + 1;\n}"
+    },
+    {
+      "explanation": "Unlike other languages however, `while` loops in Espresso are expressions.",
+      "code": "let i = 1;\nlet ans = while (i <=10) {\n  i = i + 1;\n  if (i == 5) {\n    return \"done\"; // This will break the loop and return \"done\" to the variable ans\n  }\n  i \n};\nprint(ans) // done"
+    }
+  ],
+  "Scoping": [
+    {
+      "explanation": "Espresso has block scoping. This means that variables declared inside a block are only available inside that block.",
+      "code": "{\n  let a = 20;\n  print(a); // 20\n}\nprint(a); // throws an error"
+    },
+    {
+      "explanation": "Same is true for functions, loops and conditionals.",
+      "code": "let age = 22;\nif(age > 18){\n  let adult = true;\n}\nprint(adult); // throws an error"
+    }
+  ],
+  "Return values": [
+    {
+      "explanation": "You can use the `return` keyword anywhere in the program. This will stop the execution of the current block and return the value.",
+      "code": "let a = 10;\nlet b = 20;\nreturn a + b; // 30\nprint(a / b); // This will not be executed"
+    },
+    {
+      "explanation": "Of course, you can also return from functions.",
+      "code": "let fib = fn(n){\n  if (n < 2) {\n    return n;\n  }\n  return fib(n - 1) + fib(n - 2);\n}"
+    },
+    {
+      "explanation": "Note that you can make do without the  `return` keyword in some cases.\n\nIf you don't use it, the last expression in the block will be returned. This is useful for short functions.\n",
+      "code": "let max = fn(a, b) {\n  if (a > b) {\n    a\n  } else {\n    b\n  }\n};"
+    },
+    {
+      "explanation": "While all that sounds simple, there are a few things to keep in mind.\n\nOne, returning from a block moves control over to the nearest block up the chain that can catch the returning value. This means that the following code doesn't do what you might expect.What do you think the value of `func()` will be?\n\nUnlike other languages where this would evaluate to `5`, in Espresso this will evaluate to `\"sad\"`. This is because the `return` statement breaks out of the loop and returns to the first block that catches its return value.\n\nUnlike other languages, the `return` statement is not specific to a function. It can be used anywhere in the program to return from the current block.\n\nYou might be wondering why I chose to implement it this way. The reason is that since all blocks are expressions, it would be inconsistent to have the `return` statement behave differently.\n\nThe `return` statement is meant to return a value from the current block, and that's what it does.\n\nThis also means there's no need for a `break` statement. You can use `return` to break out of a loop.",
+      "code": "let func = fn(){\n  let count = 1;\n  let lastVal = while(count <= 10){\n    count = count + 1;\n    if(count == 5){\n      return count; // This will break the loop and return 5 to the variable lastVal\n    }\n    count\n  };\n  return \"sad\";\n};\nprint(func());"
+    },
+    {
+      "explanation": "While this might look like a limitation at first, it's actually not that big of a deal. This is because `return` statements do bubble up, waiting to be caught by the first block that can handle them.\n\nFor example, the above code can be made to behave as expected by removing the `let` statement which was catching the return value. This way, the return value will bubble up to the function block.\n",
+      "code": "let func = fn(){\n  let count = 1;\n  while(count < 10){\n    count = count + 1;\n    if(count == 5){\n      return count; // This will break the loop and end the function, returning 5\n    }\n  };\n  return \"sad\";\n};\nprint(func());"
+    }
+  ],
+  "Object Oriented Programming": [
+    {
+      "explanation": "Espresso doesn't support object oriented programming. However, you can pretty much get all the way there by using dictionaries and functions.",
+      "code": "let Person = fn(name, age) {\n  let person = {\n    \"name\": name,\n    \"age\": age,\n    \"greet\": fn() {\n      print(\"Hello, my name is \" + person[\"name\"] + \" and I am \" + person[\"age\"] + \" years old.\");\n    },\n    \"birthday\": fn() {\n      person[\"age\"] = person[\"age\"] + 1;\n    }\n  };\n  return person;\n};\n\nlet john = Person(\"John\", 30);\nlet jane = Person(\"Jane\", 25);\n\njohn[\"greet\"](); // Output: Hello, my name is John and I am 30 years old.\njane[\"greet\"](); // Output: Hello, my name is Jane and I am 25 years old.\njohn[\"birthday\"]();\njohn[\"greet\"](); // Output: Hello, my name is John and I am 31 years old.\n"
+    },
+    {
+      "explanation": "Behold, the power of first class functions, closures and dictionaries. Its [functions all the way down](https://en.wikipedia.org/wiki/Turtles_all_the_way_down).",
+      "code": ""
+    }
+  ],
+  "Comments": [
+    {
+      "explanation": "Comments start with `//` and go until the end of the line.",
+      "code": "// This is a comment\nlet a = 10; // This is also a comment"
+    }
+  ],
+  "Built-in functions": [
+    {
+      "explanation": "Espresso comes with a few built-in functions.\n\n- `len`: Returns the length of any iterable.\n- `print`: Prints a value to the console.\n- `push`: Pushes a value to the end of an array.\n- `pop`: Pops a value from the end of an array by default. Takes an optional index to pop from that instead.\n- `dict`: Creates an empty dictionary.\n- `str`: Converts a value to a string.\n",
+      "code": "let count = len(\"hello\"); // 5\nprint(\"hello\", count, \"world\"); // hello 5 world\n"
+    }
+  ]
+}
