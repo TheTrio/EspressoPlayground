@@ -15,8 +15,8 @@ importers:
         specifier: ^1.26.5
         version: 1.26.5
       espressolang:
-        specifier: 1.2.2
-        version: 1.2.2
+        specifier: latest
+        version: 1.2.3
       prismjs:
         specifier: ^1.29.0
         version: 1.29.0
@@ -851,8 +851,8 @@ packages:
     resolution: {integrity: sha512-0QYC8b24HWY8zjRnDTL6RiHfDbAWn63qb4LMj1Z4b076A4une81+z03Kg7l7mn/48PUTqoLptSXez8oknU8Clg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  espressolang@1.2.2:
-    resolution: {integrity: sha512-4wtykOvlMurRCwZaBV3ECK8O6DeAICOyPRw3A7X56K0CzYdRv2ckQZzZm7GSg5yGnlfUPh/BrZx+sAKobUKGCQ==}
+  espressolang@1.2.3:
+    resolution: {integrity: sha512-ADZdo9Ic/qi4Wnv/cZTnhfSpLnyv6/SzGUYILtKPATn+jHJnTPlEMQdMVX2HpiDUeyqJTRqntDSIMU5DTxV1DA==}
     hasBin: true
 
   esquery@1.6.0:
@@ -2270,7 +2270,7 @@ snapshots:
       acorn-jsx: 5.3.2(acorn@8.14.0)
       eslint-visitor-keys: 4.2.0
 
-  espressolang@1.2.2: {}
+  espressolang@1.2.3: {}
 
   esquery@1.6.0:
     dependencies:
