@@ -92,14 +92,14 @@ function App() {
                 fontSize: 12,
               }}
               placeholder="Type your code here"
-              className=" min-h-70 bg-gray-800 text-white border border-gray-300 rounded-md p-2 h-40"
+              className=" min-h-70 bg-gray-800 text-white border border-gray-300 rounded-md p-2"
             />
           </div>
           <textarea
             value={output}
             placeholder="Output will be shown here"
             disabled
-            className="bg-gray-800 text-white border border-gray-300 rounded-md p-2 h-40"
+            className="bg-gray-800 text-white border border-gray-300 rounded-md p-2"
           ></textarea>
         </div>
       </div>
